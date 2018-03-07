@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
       table.string('descriptions')
       table.boolean('completed')
       table.string('user')
-      table.foreign('user').references('userId').inTable('users')
+      //table.foreign('user')//.references('userId').inTable('users')
     })
     
   ]) 

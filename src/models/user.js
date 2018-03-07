@@ -12,6 +12,21 @@ User.findByUsername = function(username) {
     });
 };
 
-// TODO: ADD MORE MODEL FUNCTIONS HERE
+//check that these don't need template literals 
+User.addNewUser = function(username, password) {
+  return db.insert([{username: username}, {password: password}], 'id').into('users')
+}
+
+// User.SELECTALLFROMUSERS = function() {
+//   return db.select().table('users')
+//   .then(function(user){
+//     return user;
+//   })
+//   .catch(function(err) {
+//     console.error(err)
+//   });
+  
+// }
+
 
 module.exports = User;

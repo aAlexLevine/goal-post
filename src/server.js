@@ -1,12 +1,22 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+let router = require('./routes.js')
+
+let goals
 
 var app = express();
 
-// TODO: SET UP SERVER
-  // Add middleware
-  // Add static file service
-  // Add API routes
+app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(express.static(__dirname + '/client/react-client/dist'));
+// app.use(express.static(path.join(__dirname, '/client/react-client/dist')));
+// app.use(express.static(__dirname + '/../node_modules'));
+
+app.use(router)
+
+
+
 
 // Example route. See server-spec.js for the related test.
 app.get('/zen', function(req, res) {
