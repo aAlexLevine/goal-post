@@ -9,8 +9,8 @@ var user = require('./models/user.js')
    //Returns an array of all Goal titles and ids by User
 router.get('/goals', function(req, res) {
  console.log('--post fired')
- console.log('req.body',req.body)
-  let user =req.body.name
+ console.log('req.query',req.query)
+  let user =req.query.name
   goal.findAllGoalsByUser(user)
     .then(function(data){
       console.log('data------',data)
@@ -27,7 +27,7 @@ router.get('/goals', function(req, res) {
 router.post('/goals', function(req, res) {
   console.log('--------post fired')
   console.log('---------req.body', req.body)
-  goal.addGoal(req.body)
+  goal.addGoal(req.body.form)
     .then(function(data){
       res.send('new goal set')
     })
@@ -48,8 +48,20 @@ router.get('/goals/:id', function(req, res) {
       console.log('router.get(/goals:id)', err)
     })
 
-
 })
+
+//Updates Goal to completed -retrieves by ID
+router.get('/goals/update/:id', function(req, res) {
+  goal.updateGoalById(req.params.id)
+    .then(function(data) {
+      res.send(data)
+      console.log('update goal by id triggered')
+    })
+    .catch(function(err){
+      console.log('error in update goal', err)
+    })
+})
+
 
 ///////////////////////////////////////////////////////////////////
 router.post('/signup', function(req, res) {

@@ -13,7 +13,7 @@ Goal.findAllGoalsByUser = function(user) {
 }
 
 Goal.addGoal = function(goal) {
-    var insert1 = {name: goal.name, descriptions: goal.description, completed: goal.completed, user: goal.user}
+    var insert1 = {name: goal.name, descriptions: goal.descriptions, completed: goal.completed, user: goal.user}
     return db.insert(insert1).into('goals')
         .then(function (id) {
             console.log('inserted', id)
@@ -36,8 +36,14 @@ Goal.getGoalById = function(goalId) {
 
 
 
-Goal.updateGoalById = function(goalID) {
-    
+Goal.updateGoalById = function(id) {
+    return db('goals').where({goalID: id}).update({completed:true})
+        .then((resp)=>{
+            console.log(resp)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
 }
 
 
